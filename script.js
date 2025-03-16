@@ -242,7 +242,11 @@ function toogleVisibiltyTitle() {
 
 // Toggle play video
 playPauseBtn.addEventListener("click", togglePlay);
-video.addEventListener("click", togglePlay);
+video.addEventListener("click", () => {
+    if (videoControlsContainer.classList.contains("visible")) {
+        togglePlay();
+    }
+});
 video.addEventListener("dblclick", toogleFullscreenMode)
 
 function togglePlay() {
@@ -267,6 +271,11 @@ video.addEventListener("pause", showControlsAndHideIfFullscreenMode)
 function showControlsAndHideIfFullscreenMode() {
     clearTimeout(hideTimeout);
     videoControlsContainer.style.opacity = "1";
+    if (videoControlsContainer.style.opacity === "1") {
+        videoControlsContainer.classList.add("visible");
+    } else {
+        videoControlsContainer.classList.remove("visible");
+    }
     if (!document.fullscreenElement) return;
     hideTimeout = setTimeout(() => {
         videoControlsContainer.style.opacity = "0";
@@ -276,11 +285,18 @@ function showControlsAndHideIfFullscreenMode() {
 function showControlsAndHideWithoutCondition() {
     clearTimeout(hideTimeout);
     videoControlsContainer.style.opacity = "1";
+    if (videoControlsContainer.style.opacity === "1") {
+        videoControlsContainer.classList.add("visible");
+    } else {
+        videoControlsContainer.classList.remove("visible");
+    }
     hideTimeout = setTimeout(() => {
         videoControlsContainer.style.opacity = "0";
     }, 3000);
 }
 
-videoContainer.addEventListener("mousemove", showControlsAndHideIfFullscreenMode)
+videoContainer.addEventListener("mousemove", showControlsAndHideWithoutCondition)
 
 videoContainer.addEventListener("mousedown", showControlsAndHideWithoutCondition)
+
+// videoContainer.addEventListener("touchstart", showControlsAndHideWithoutCondition)
