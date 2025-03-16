@@ -273,12 +273,11 @@ function showControlsAndHideIfFullscreenMode() {
     videoControlsContainer.style.opacity = "1";
     if (videoControlsContainer.style.opacity === "1") {
         videoControlsContainer.classList.add("visible");
-    } else {
-        videoControlsContainer.classList.remove("visible");
-    }
+    } 
     if (!document.fullscreenElement) return;
     hideTimeout = setTimeout(() => {
         videoControlsContainer.style.opacity = "0";
+        videoControlsContainer.classList.remove("visible");
     }, 3000);
 }
 
@@ -287,11 +286,10 @@ function showControlsAndHideWithoutCondition() {
     videoControlsContainer.style.opacity = "1";
     if (videoControlsContainer.style.opacity === "1") {
         videoControlsContainer.classList.add("visible");
-    } else {
-        videoControlsContainer.classList.remove("visible");
-    }
+    } 
     hideTimeout = setTimeout(() => {
         videoControlsContainer.style.opacity = "0";
+        videoControlsContainer.classList.remove("visible");
     }, 3000);
 }
 
