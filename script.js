@@ -138,13 +138,13 @@ function toogleCaptions() {
 }
 
 // Durations
-video.addEventListener("loadedmetadata", () => {
-    totalTimeElem.textContent = formatDuration(video.duration);
-})
+// video.addEventListener("loadedmetadata", () => {
+//     totalTimeElem.textContent = formatDuration(video.duration);
+// })
 
 video.addEventListener("timeupdate", () => {
     currentTimeElem.textContent = formatDuration(video.currentTime);
-    // video.currentTime === video.duration ? videoContainer.classList.add("paused") : videoContainer.classList.remove("paused");
+    totalTimeElem.textContent = formatDuration(video.duration);
 })
 
 const leadingZeroFormatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
