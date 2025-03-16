@@ -1,0 +1,44 @@
+:root {
+    --height-timeline: 0.2rem;
+}
+
+.timeline-container {
+    position: relative;
+    width: 96%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+}
+
+.timeline {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: var(--height-timeline);
+    background-color: #e66f6f;
+    z-index: 20;
+ }
+
+ .buffered {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: var(--height-timeline);
+    background-color: #cec8c8;
+    z-index: 10;
+ }
+
+ .duration {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--height-timeline);
+    background-color: #cec8c8;
+    opacity: 0.5;
+    z-index: 5;
+ }

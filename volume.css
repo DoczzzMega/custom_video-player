@@ -1,0 +1,48 @@
+.volume-muted-icon,
+.volume-low-icon,
+.volume-high-icon {
+    display: none;
+}
+
+.video-container[data-volume-level="hight"] .volume-high-icon {
+    display: block;
+}
+
+.video-container[data-volume-level="low"] .volume-low-icon {
+    display: block; 
+}
+
+.video-container[data-volume-level="muted"] .volume-muted-icon {
+    display: block;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volume-slider {
+    width: 0;
+    transition: width 0.15s ease-in-out, transform 0.15s ease-in-out;
+    transform-origin: left;
+    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    -o-transform: scaleX(0);
+    -webkit-transition: width 0.15s ease-in-out, transform 0.15s ease-in-out;
+    -moz-transition: width 0.15s ease-in-out, transform 0.15s ease-in-out;
+    -ms-transition: width 0.15s ease-in-out, transform 0.15s ease-in-out;
+    -o-transition: width 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+.volume-container:hover .volume-slider,
+.volume-container:focus-within .volume-slider {
+    width: 50%;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+    -moz-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    -o-transform: scaleX(1);
+}

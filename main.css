@@ -1,0 +1,149 @@
+/* .play-icon {
+    color: green;
+} */
+
+:root {
+    --color-icons: oklch(0.871 0.006 286.286);
+}
+
+body {
+    padding-top: 40px;
+}
+
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+svg path {
+    fill: var(--color-icons);
+}
+
+.mini-player-btn svg path {
+    fill: transparent;
+    stroke: var(--color-icons);
+}
+
+.video-container.captions svg.subtitles-icon path {
+    fill: #e75e5e;
+}
+
+  .video-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    margin: 0 auto;
+    background-color: black;
+  }
+
+  .video-container.theater {
+    max-width: initial;
+    width: 100%;
+    max-height: 80vh;
+  }
+
+  .video-container.fullscreen {
+    max-width: initial;
+    width: 100%;
+    max-height: 100vh;
+  }
+
+  .video {
+    width: 100%;
+  }
+
+  .video-controls-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    -webkit-transition: opacity 0.15s ease-in-out;
+    -moz-transition: opacity 0.15s ease-in-out;
+    -ms-transition: opacity 0.15s ease-in-out;
+    -o-transition: opacity 0.15s ease-in-out;
+}
+
+.video-container:hover .video-controls-container,
+.video-container:focus-within .video-controls-container,
+.video-container.paused .video-controls-container {
+    opacity: 1;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    
+    gap: 1rem;
+    padding: .5rem;
+}
+
+.video-controls::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+    aspect-ratio: 6 / 1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.video-controls button {
+    opacity: .85;
+    transition: opacity 0.15s ease-in-out;
+    -webkit-transition: opacity 0.15s ease-in-out;
+    -moz-transition: opacity 0.15s ease-in-out;
+    -ms-transition: opacity 0.15s ease-in-out;
+    -o-transition: opacity 0.15s ease-in-out;
+}
+
+.video-controls button:hover {
+    opacity: 1;
+}
+
+.view-mode {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+}
+
+.video-container.paused .pause-icon {
+    display: none;
+}
+
+.video-container:not(.paused) .play-icon {
+    display: none;
+}
+
+.video-container.theater .rectangle-icon {
+    display: none;
+}
+
+.video-container:not(.theater) .rectangle-small-icon {
+    display: none;
+}
+
+.video-container.fullscreen .fullscreen-icon {
+    display: none;
+}
+
+.video-container:not(.fullscreen) .fullscreen-exit-icon {
+    display: none;
+}
+
+.speed-btn {
+    color: var(--color-icons);
+    font-size: 1.2rem;
+    width: 40px;
+}
+
