@@ -122,6 +122,7 @@ function changePlaybackSpeed() {
 
 // Captions
 const captions = video.textTracks[0];
+captions.mode = "hidden"; //default value = "default"
 
 captionsBtn.addEventListener("click", toogleCaptions);
 
@@ -151,7 +152,7 @@ function formatDuration(duration) {
     if (hours === 0) {
         return `${leadingZeroFormatter.format(minutes)}:${leadingZeroFormatter.format(seconds)}`;
     } else {
-        return `${leadingZeroFormatter.format(hours)}:${leadingZeroFormatter.format(minutes)}:${leadingZeroFormatter.format(seconds)}`;
+        return `${hours}:${leadingZeroFormatter.format(minutes)}:${leadingZeroFormatter.format(seconds)}`;
     }
     
 }
@@ -235,7 +236,9 @@ function togglePlay() {
     video.paused ? videoContainer.classList.add("paused") : videoContainer.classList.remove("paused");
 }
 
-
+video.addEventListener("ended", () => {
+    videoContainer.classList.add("paused");
+})
 
 // video.addEventListener("play", () => { videoContainer.classList.remove("paused") })
 
