@@ -3,6 +3,8 @@ const theaterBtn = document.querySelector(".theater-btn");
 const fullscreenBtn = document.querySelector(".fullscreen-btn");
 const miniPlayerBtn = document.querySelector(".mini-player-btn");
 
+const title = document.querySelector(".title");
+
 const currentTimeElem = document.querySelector(".current-time");
 const totalTimeElem = document.querySelector(".total-time");
 
@@ -19,6 +21,8 @@ const volumeSlider = document.querySelector(".volume-slider");
 
 const video = document.querySelector(".video");
 const videoContainer = document.querySelector(".video-container");
+
+const videoControlsContainer = document.querySelector(".video-controls-container");
 
 video.volume = 0.5;
 
@@ -58,6 +62,7 @@ document.addEventListener("keydown", (e) => {
             break;
         case "m":
             toggleMute();
+            showControlsAndHideWithoutCondition();
             break;
         case "c":
             toogleCaptions();
@@ -142,7 +147,7 @@ video.addEventListener("timeupdate", () => {
     // video.currentTime === video.duration ? videoContainer.classList.add("paused") : videoContainer.classList.remove("paused");
 })
 
-const leadingZeroFormatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 }); 
+const leadingZeroFormatter = new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
 
 function formatDuration(duration) {
     const hours = Math.floor(duration / 3600);
@@ -154,7 +159,7 @@ function formatDuration(duration) {
     } else {
         return `${hours}:${leadingZeroFormatter.format(minutes)}:${leadingZeroFormatter.format(seconds)}`;
     }
-    
+
 }
 
 // Volume
@@ -226,6 +231,15 @@ video.addEventListener("leavepictureinpicture", () => {
     videoContainer.classList.remove("mini-player");
 })
 
+// Toggle in theater Mode visability upper blocks
+theaterBtn.addEventListener("click", toogleVisibiltyTitle);
+
+function toogleVisibiltyTitle() {
+    const isHidden = title.style.display === "none";
+    title.style.display = isHidden ? "block" : "none";
+    document.body.style.paddingTop = isHidden ? "40px" : "0";
+}
+
 // Toggle play video
 playPauseBtn.addEventListener("click", togglePlay);
 video.addEventListener("click", togglePlay);
@@ -243,3 +257,30 @@ video.addEventListener("ended", () => {
 // video.addEventListener("play", () => { videoContainer.classList.remove("paused") })
 
 // video.addEventListener("pause", () => { videoContainer.classList.add("paused") })
+
+// Toggle showing controls
+let hideTimeout
+video.addEventListener("play", showControlsAndHideWithoutCondition)
+
+video.addEventListener("pause", showControlsAndHideIfFullscreenMode)
+
+function showControlsAndHideIfFullscreenMode() {
+    clearTimeout(hideTimeout);
+    videoControlsContainer.style.opacity = "1";
+    if (!document.fullscreenElement) return;
+    hideTimeout = setTimeout(() => {
+        videoControlsContainer.style.opacity = "0";
+    }, 3000);
+}
+
+function showControlsAndHideWithoutCondition() {
+    clearTimeout(hideTimeout);
+    videoControlsContainer.style.opacity = "1";
+    hideTimeout = setTimeout(() => {
+        videoControlsContainer.style.opacity = "0";
+    }, 3000);
+}
+
+videoContainer.addEventListener("mousemove", showControlsAndHideIfFullscreenMode)
+
+videoContainer.addEventListener("mousedown", showControlsAndHideWithoutCondition)
