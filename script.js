@@ -109,7 +109,7 @@ function updateProgress() {
 }
 
 function setProgress(e) {
-    const newTime = (e.offsetX / e.target.offsetWidth) * video.duration;
+    const newTime = (e.offsetX / this.offsetWidth) * 100;
     video.currentTime = newTime;
 }
 
