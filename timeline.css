@@ -1,5 +1,5 @@
 :root {
-  --height-timeline: 0.2rem;
+  --height-timeline: 4px;
 }
 
 .timeline-container {
@@ -10,7 +10,7 @@
   cursor: pointer;
   margin: 0 auto;
   /* padding-top: 1.5rem; */
-  height: 8px;
+  height: 6px;
 }
 
 .timeline-container:hover .timeline {
@@ -77,12 +77,12 @@
 .timeline-container:hover .timeline::before {
   display: block;
   height: 100%;
-  top: -25%;
+  top: -15%;
 }
 
 .timeline-container:hover .timeline::after,
 .timeline-container:hover .duration,
 .timeline-container:hover .buffered {
   height: 100%;
-  top: -25%;
+  top: -15%;
 }
