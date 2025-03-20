@@ -39,7 +39,8 @@ svg path {
     display: flex;
     margin: 0 auto;
     background-color: black;
-  }
+    overflow: hidden;
+}
 
   .video-container.theater {
     max-width: initial;
@@ -55,7 +56,7 @@ svg path {
 
   .video {
     width: 100%;
-  }
+}
 
   .video-controls-container {
     position: absolute;

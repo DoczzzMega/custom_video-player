@@ -50,15 +50,19 @@ document.addEventListener("keydown", (e) => {
             break;
         case "k":
             togglePlay();
+            showControlsAndHideWithoutCondition();
             break;
         case "f":
             toogleFullscreenMode();
+            showControlsAndHideWithoutCondition();
             break;
         case "i":
             toogleMiniPlayerMode();
+            showControlsAndHideWithoutCondition();
             break;
         case "t":
             toogleTheaterMode();
+            showControlsAndHideWithoutCondition();
             break;
         case "m":
             toggleMute();
@@ -66,6 +70,7 @@ document.addEventListener("keydown", (e) => {
             break;
         case "c":
             toogleCaptions();
+            showControlsAndHideWithoutCondition();
             break;
     }
 
@@ -73,12 +78,15 @@ document.addEventListener("keydown", (e) => {
         case "l":
         case "ArrowRight":
             video.currentTime += 5;
+            showControlsAndHideWithoutCondition();
             break;
         case "j":
         case "ArrowLeft":
             video.currentTime -= 5;
+            showControlsAndHideWithoutCondition();
             break;
         case "ArrowUp":
+            showControlsAndHideWithoutCondition();
             if (video.volume >= 0.95) {
                 video.volume = 1;
                 break
@@ -87,6 +95,7 @@ document.addEventListener("keydown", (e) => {
             video.volume += 0.05;
             break;
         case "ArrowDown":
+            showControlsAndHideWithoutCondition();
             if (video.volume <= 0.15) {
                 video.volume = 0;
                 break
@@ -102,10 +111,20 @@ video.addEventListener("timeupdate", updateProgress)
 
 timelineContainer.addEventListener("click", setProgress);
 
+timelineContainer.addEventListener("mousemove", updatePreviewTimeline);
+
+function updatePreviewTimeline(e) {
+    const newTime = (e.offsetX / this.offsetWidth);
+    timelineContainer.style.setProperty("--preview-position", newTime);
+}
+
 function updateProgress() {
     const bufferedWidth = (video.buffered.end(video.buffered.length - 1) / video.duration) * 100;
     buffered.style.width = `${bufferedWidth}%`;
-    timeline.style.width = `${(video.currentTime / video.duration) * 100}%`;
+    // timeline.style.width = `${(video.currentTime / video.duration) * 100}%`;
+
+    const newTimeOfTimeline = (video.currentTime / video.duration);
+    timelineContainer.style.setProperty("--position-progress", newTimeOfTimeline);
 }
 
 function setProgress(e) {
@@ -208,7 +227,6 @@ function toogleFullscreenMode() {
     }
 
     videoContainer.classList.toggle("fullscreen");
-    videoContainer.classList.remove("theater");
 }
 
 function toogleMiniPlayerMode() {
@@ -242,11 +260,7 @@ function toogleVisibiltyTitle() {
 
 // Toggle play video
 playPauseBtn.addEventListener("click", togglePlay);
-video.addEventListener("click", () => {
-    if (videoControlsContainer.classList.contains("visible")) {
-        togglePlay();
-    }
-});
+video.addEventListener("click", togglePlay);
 video.addEventListener("dblclick", toogleFullscreenMode)
 
 function togglePlay() {
@@ -271,25 +285,17 @@ video.addEventListener("pause", showControlsAndHideIfFullscreenMode)
 function showControlsAndHideIfFullscreenMode() {
     clearTimeout(hideTimeout);
     videoControlsContainer.style.opacity = "1";
-    if (videoControlsContainer.style.opacity === "1") {
-        videoControlsContainer.classList.add("visible");
-    } 
     if (!document.fullscreenElement) return;
     hideTimeout = setTimeout(() => {
         videoControlsContainer.style.opacity = "0";
-        videoControlsContainer.classList.remove("visible");
     }, 3000);
 }
 
 function showControlsAndHideWithoutCondition() {
     clearTimeout(hideTimeout);
     videoControlsContainer.style.opacity = "1";
-    if (videoControlsContainer.style.opacity === "1") {
-        videoControlsContainer.classList.add("visible");
-    } 
     hideTimeout = setTimeout(() => {
         videoControlsContainer.style.opacity = "0";
-        videoControlsContainer.classList.remove("visible");
     }, 3000);
 }
 
