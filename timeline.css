@@ -36,7 +36,7 @@
   height: var(--height-timeline);
   top: 0;
   right: calc(100% - var(--preview-position) * 100%);
-  background-color: #f8b9b9;
+  background-color: #f8d2b9;
   z-index: 15;
   display: none;
 }
